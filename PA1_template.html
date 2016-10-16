@@ -127,8 +127,8 @@ library(ggplot2)
 mydata = read.csv(&quot;activity.csv&quot;, header = TRUE)
 mydata$date = as.Date(mydata$date, format= &quot;%Y-%m-%d&quot;)</code></pre>
 </div>
-<div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
-<h2>What is mean total number of steps taken per day?</h2>
+<div id="mean-total-number-of-steps-taken-per-day" class="section level2">
+<h2>Mean total number of steps taken per day</h2>
 <p>The total number of steps taken per day will be obtained in the following data frame where we split our original data by date and add the number of steps for each given day. With this information, we can now make a histogram of the total number of steps per day. Finally, we compute the mean and median of the number of steps per day.</p>
 <pre class="r"><code>totalSteps = ddply(mydata, .(date), summarize, tot = sum(steps))
 qplot(totalSteps$tot, geom = &quot;histogram&quot;, binwidth=500, ylab=&quot;Frequency&quot;, xlab=&quot;Number of steps&quot;)</code></pre>
@@ -141,8 +141,8 @@ print(mymean)</code></pre>
 <pre class="r"><code>print(mymedian)</code></pre>
 <pre><code>## [1] 10765</code></pre>
 </div>
-<div id="what-is-the-average-daily-activity-pattern" class="section level2">
-<h2>What is the average daily activity pattern?</h2>
+<div id="average-daily-activity-pattern" class="section level2">
+<h2>Average daily activity pattern</h2>
 <ol style="list-style-type: decimal">
 <li>Make a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis) For this part of the assignment, I first created a new data frame with he average number of steps taken in each 5-min interval. I then used that data frame to make the plot.</li>
 </ol>
@@ -152,9 +152,8 @@ plot(avgSteps$interval, avgSteps$aveSteps, type = 'l', xlab=&quot;Interval&quot;
 <ol start="2" style="list-style-type: decimal">
 <li>Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps? We compute the maximum of the column</li>
 </ol>
-<pre class="r"><code>mymax = max(avgSteps$aveSteps, na.rm = TRUE)
-print(mymax)</code></pre>
-<pre><code>## [1] 206.1698</code></pre>
+<pre class="r"><code>avgSteps$interval[which(avgSteps$aveSteps == max(avgSteps$aveSteps, na.rm = TRUE))]</code></pre>
+<pre><code>## [1] 835</code></pre>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
@@ -213,8 +212,8 @@ print(mymean2)</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
 <p>The means remain the same and the medians are slightly different. THis is expected given the way we inputed the data.</p>
 </div>
-<div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
-<h2>Are there differences in activity patterns between weekdays and weekends?</h2>
+<div id="differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
+<h2>Differences in activity patterns between weekdays and weekends</h2>
 <ol style="list-style-type: decimal">
 <li>Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</li>
 </ol>

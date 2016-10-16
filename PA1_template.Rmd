@@ -17,7 +17,7 @@ mydata$date = as.Date(mydata$date, format= "%Y-%m-%d")
 ```
 
 
-## What is mean total number of steps taken per day?
+## Mean total number of steps taken per day
 The total number of steps taken per day will be obtained in the following data frame where we split our original data by date and add the number of steps for each given day. With this information, we can now make a histogram of the total number of steps per day. Finally, we compute the mean and median of the number of steps per day.
 ```{r}
 totalSteps = ddply(mydata, .(date), summarize, tot = sum(steps))
@@ -29,7 +29,7 @@ print(mymedian)
 ```
 
 
-## What is the average daily activity pattern?
+## Average daily activity pattern
 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis)
 and the average number of steps taken, averaged across all days (y-axis)
 For this part of the assignment, I first created a new data frame with he average number of steps taken in each 5-min interval. I then used that data frame to make the plot.
@@ -42,9 +42,9 @@ plot(avgSteps$interval, avgSteps$aveSteps, type = 'l', xlab="Interval", ylab = "
 contains the maximum number of steps?
 We compute the maximum of the column 
 ```{r}
-mymax = max(avgSteps$aveSteps, na.rm = TRUE)
-print(mymax)
+avgSteps$interval[which(avgSteps$aveSteps == max(avgSteps$aveSteps, na.rm = TRUE))]
 ```
+
 ## Imputing missing values
 1. Calculate and report the total number of missing values in the dataset
 (i.e. the total number of rows with NAs)
@@ -103,7 +103,7 @@ print(mymedian2)
 ```
 The means remain the same and the medians are slightly different. THis is expected given the way we inputed the data.
 
-## Are there differences in activity patterns between weekdays and weekends?
+## Differences in activity patterns between weekdays and weekends
 1. Create a new factor variable in the dataset with two levels – “weekday”
 and “weekend” indicating whether a given date is a weekday or weekend day.
 
