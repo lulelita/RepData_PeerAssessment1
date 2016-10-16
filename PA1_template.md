@@ -18,7 +18,7 @@ The total number of steps taken per day will be obtained in the following data f
 
 ```r
 totalSteps = ddply(mydata, .(date), summarize, tot = sum(steps))
-qplot(totalSteps$tot, geom = "histogram", binwidth=100, ylab="Frequency")
+qplot(totalSteps$tot, geom = "histogram", binwidth=500, ylab="Frequency", xlab="Number of steps")
 ```
 
 ```
@@ -30,6 +30,14 @@ qplot(totalSteps$tot, geom = "histogram", binwidth=100, ylab="Frequency")
 ```r
 mymean = mean(totalSteps$tot, na.rm = TRUE)
 mymedian = median(totalSteps$tot, na.rm = TRUE)
+print(mymean)
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 print(mymedian)
 ```
 
@@ -161,8 +169,11 @@ Here is the histogram with the total number of steps, done in an analogous way a
 ```r
 totalSteps2 = ddply(newdata, .(date), summarize, tot = sum(steps))
 
-myplot2 = qplot(totalSteps2$tot, geom = "histogram")
+qplot(totalSteps2$tot, geom = "histogram", binwidth=500, ylab="Frequency", xlab="Number of steps")
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+
 We then calculate the mean and median number of steps taken each day:
 
 ```r

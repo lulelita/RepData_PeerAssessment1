@@ -21,9 +21,10 @@ mydata$date = as.Date(mydata$date, format= "%Y-%m-%d")
 The total number of steps taken per day will be obtained in the following data frame where we split our original data by date and add the number of steps for each given day. With this information, we can now make a histogram of the total number of steps per day. Finally, we compute the mean and median of the number of steps per day.
 ```{r}
 totalSteps = ddply(mydata, .(date), summarize, tot = sum(steps))
-qplot(totalSteps$tot, geom = "histogram", binwidth=100, ylab="Frequency")
+qplot(totalSteps$tot, geom = "histogram", binwidth=500, ylab="Frequency", xlab="Number of steps")
 mymean = mean(totalSteps$tot, na.rm = TRUE)
 mymedian = median(totalSteps$tot, na.rm = TRUE)
+print(mymean)
 print(mymedian)
 ```
 
@@ -90,8 +91,9 @@ Here is the histogram with the total number of steps, done in an analogous way a
 ```{r}
 totalSteps2 = ddply(newdata, .(date), summarize, tot = sum(steps))
 
-myplot2 = qplot(totalSteps2$tot, geom = "histogram")
+qplot(totalSteps2$tot, geom = "histogram", binwidth=500, ylab="Frequency", xlab="Number of steps")
 ```
+
 We then calculate the mean and median number of steps taken each day:
 ```{r}
 mymean2 = mean(totalSteps2$tot)
